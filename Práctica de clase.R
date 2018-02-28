@@ -56,4 +56,12 @@
 #Es posible asignar nombres a los elementos de un vector mediante la función names
   x<-1:3
   names(x)<-c("foo","bar","norf")
-  
+#Lectura y escritura de datos 
+#1.-Creo el objeto
+  y<-data.frame(a=1,b="a")
+#2.-Estudio la manera en la que se guardará
+  dput(y)
+#3.-Lo guardo en mi disco duro
+  dput(y,file = "~/y.R")
+# 4. Genero un nuevo objeto a partir de la info guardada
+  y2 <- dget(file="~/y.R")
