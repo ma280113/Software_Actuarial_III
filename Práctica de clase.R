@@ -65,3 +65,44 @@
   dput(y,file = "~/y.R")
 # 4. Genero un nuevo objeto a partir de la info guardada
   y2 <- dget(file="~/y.R")
+#Dump y Source
+  #Guarda info en un archivo 
+    dump(c("x","c"),file = "data.r")
+  #Corre el código de un archivo
+    source("data.r")
+#Conexiones file, gzip, url
+  conexion<-url("https://www.fcfm.buap.mx/")
+  x<-readLines(conexion)
+  x[7]<-"\t<title>FCFM </title>"
+  writeLines(x,"FCFM.html")
+#Subconjuntos
+  #[]Regresa un objeto de la misma clase del original
+  #[[]]Regresa un obeto con su misma clase
+  #$ Se usa para extraer elemenetos de una lista por nombre
+  #Creamos un vector
+    x<-c("a","b","c","c","d","e")
+  #Extraemos elementos con []
+    x[1]
+  #También podemos extraer una secuencia de elementos
+    x[1:3]
+  #Es posible extraer los elementos que cumplen una restricción
+    x[x>"b"]
+  #De manera equivalente se puede tener un vector lógico
+    u<-x=="c"
+    x[u]
+  #Creamos una lista y extraemos de ambas formas
+    x<-list(foo=1:4,bar=0.6)
+    x[1]    
+    x[[1]]    
+    x$foo
+  #Para extraer elementos no consecutivos
+    x[c(1,2)]
+  #Anidar subconjuntos de listas
+    x<-list(a=list(10,12,14),b=list(3.14,2.81))
+    x[[c(1,3)]]    
+    x<-matrix(1:6,2,3)
+    x[1,2]
+    x[1,2,drop=FALSE]
+    x[1:2,1:2 ,drop=FALSE]
+    mtcars$mpg[15]/mtcars$cyl[15]
+    
