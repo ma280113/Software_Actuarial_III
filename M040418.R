@@ -23,3 +23,33 @@ apply(a, 1,mean)
 #Atajos 
 rowSums()=apply(x,1,sum)
 rowMeans()=apply(x, 1, mean)
+#Errores:
+  #message: una notificación que se produce sin detener el código
+log(-1)
+  #warning: Un error pero no fatal y el código sigue corriendo
+imprimeMSJ<-function(x){
+  if(is.na(x))                         #estas dos lineas liberan a la función 
+      print("x es un valor faltante")  #del error.
+  else if(x>0)
+      print("x es mayor que 0")
+  else
+      print("x es menor o igual a 0")
+  invisible(x)
+}
+imprimeMSJ(1)
+imprimeMSJ(NA)
+  #error: un aviso de un error fatal, el código se detiene
+  #Condition: un concepto genérico para indicar que algo inesperado puede
+  #|ocurrir, se puede creear una propia condición.
+#Herramientas para depurar
+traceback(imprimeMSJ(NA))#imprime la función que se está ejecutando
+debug()#marca la función para correrla paso a paso
+browser()#suspende la ejecución de una función y pone la función en depuración
+#.
+#.
+#.
+#Funciones para distribuciones de probbilidad en R
+rnorm
+dnorm
+pnorm
+rpois
