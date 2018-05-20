@@ -13,10 +13,13 @@ mejor<-function(estado,resultado){
     dat<-outcome[outcome$State==estado,]
   }
   if (resultado=="ataque") {
+    dat<-dat[order(dat[,11],dat[,2]),]
     res<-dat[which.min(dat[,11]),]
   } else if(resultado=="neumonia") {
+    dat<-dat[order(dat[,23],dat[,2),]
     res<-dat[which.min(dat[,23]),]
   } else if(resultado=="falla"){
+    dat<-dat[order(dat[,17],dat[,2),]
     res<-dat[which.min(dat[,17]),]
   } else {
     stop("Resultado invalido")
