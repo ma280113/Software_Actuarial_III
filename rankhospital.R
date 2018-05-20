@@ -43,3 +43,4 @@ rankhospital<-function(estado,resultado,num="mejor"){
   }
   as.character(res)
 }
+}
