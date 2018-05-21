@@ -7,37 +7,48 @@ rankingcompleto<-function(resultado,num="mejor"){
   dat[,17]<-as.numeric(dat[,17])
   dat[,23]<-as.numeric(dat[,23])
   options(warn=0)
-  Hospital<-dat[,2]
+  Nombre<-dat[,2]
   Ataque<-dat[,11]
   Falla<-dat[,17]
   Neumo<-dat[,23]
-  Estado<-dat[,7]
-
-  if (resultado=="ataque") {
-    r<-data.frame(Hospital,Estado,Ataque)
-    r<-r[order(r$Ataque,r$Hospital),]
-    r<-r[!is.na(r$Ataque),]
-    r<-r[,-3]
-  } else if(resultado=="neumonia") {
-    r<-data.frame(Hospital,Estado,Neumo)
-    r<-r[order(r$Neumo,r$Hospital),]
-    r<-r[!is.na(r$Neumo),]
-    r<-r[,-3]
-  } else if(resultado=="falla"){
-    r<-data.frame(Hospital,Estado,Falla)
-    r<-r[order(r$Falla,r$Hospital),]
-    r<-r[!is.na(r$Falla),]
-    r<-r[,-3]
-  } else {
-    stop("Resultado invalido")
+  Estado1<-dat[,7]
+  n<-1:length(unique(Estado1))
+  
+  if(num=="peor"){
+    o<-TRUE
+    num<-1
+  } else if (num=="mejor"){
+    num<-1
+    o<-FALSE
+  } else if(is.numeric(num)==FALSE){
+    stop("num invalido")
+  } else{
+    o<-FALSE
+  }
+    
+  if (resultado=="ataque"){
+    a<-data.frame(Nombre,Estado1,Ataque)
+    a<-a[order(a$Ataque,a$Nombre,decreasing = o),]
+    a<-a[!is.na(a$Ataque),]
+  } else if (resultado=="falla"){
+    a<-data.frame(Nombre,Estado1,Falla)
+    a<-a[order(a$Falla,a$Nombre,decreasing = o),]
+    a<-a[!is.na(a$Falla),]
+  } else if (resultado=="neumonia"){
+    a<-data.frame(Nombre,Estado1,Neumo)
+    a<-a[order(a$Neumo,a$Nombre,decreasing = o),]
+    a<-a[!is.na(a$Neumo),]
+  } else{
+    stop("resultado invalido")
   }
   
-  if (num=="mejor"){
-    r
-  } else if(num=="peor"){
-    
-  } else {
-    r<-r[num:length(Hospital),]
+  b<-split(a,a$Estado1)
+  t<-data.frame()
+  for (i in n) {
+    c<-as.data.frame(b[i])
+    Hospital<-as.character(c[num,1])
+    Estado<-as.character(c[num,2])
+    t<-rbind(t,data.frame(Hospital,Estado))
   }
-  r
+  t
 }
